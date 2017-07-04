@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TaskBoardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -113,7 +114,6 @@
   <ItemGroup>
     <Folder Include="app\lib\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +122,7 @@
     <TypeScriptCompile Include="app\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="app\components\header\header.component.ts" />
     <TypeScriptCompile Include="app\components\setting\setting.component.ts" />
+    <TypeScriptCompile Include="app\Core\Common\hyperlinkerTemplate.ts" />
     <TypeScriptCompile Include="app\main.ts" />
   </ItemGroup>
   <ItemGroup>

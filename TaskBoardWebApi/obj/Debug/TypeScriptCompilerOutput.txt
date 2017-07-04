@@ -10,3 +10,5 @@ C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.module.js
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.module.js.map
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\main.js
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\main.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\Core\Common\hyperlinkerTemplate.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\Core\Common\hyperlinkerTemplate.js.map

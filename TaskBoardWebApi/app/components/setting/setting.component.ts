@@ -5,4 +5,6 @@
     templateUrl: 'setting.component.html',
     moduleId: module.id
 })
-export class SettingComponent { }
+export class SettingComponent {
+    public hyperlinkTemplate: boolean = false;
+}
