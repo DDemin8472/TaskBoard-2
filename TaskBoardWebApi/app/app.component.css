@@ -1,0 +1,39 @@
+﻿body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.toppane {
+    /*height: 35%;*/
+    height:auto;
+    min-height:35%;
+    background-color: Highlight;
+}
+
+.leftpane {
+    width: 20%;
+    min-width: 20%;
+    /*height: 65%;*/
+    height:auto;
+    min-height:65%;
+    float: left;
+    background-color:aqua;
+    border-collapse: collapse;
+}
+
+.rightpane {
+    width: 80%;
+    min-width:80%;
+    /*height: 65%;*/
+    height:auto;
+    min-height:65%;
+    position: relative;
+    float: right;
+    background-color: darkmagenta;
+    border-collapse: collapse;
+}

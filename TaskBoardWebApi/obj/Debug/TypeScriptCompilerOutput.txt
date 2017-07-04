@@ -1,0 +1,12 @@
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.component.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.component.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\header\header.component.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\header\header.component.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\setting\setting.component.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\setting\setting.component.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\dashboard\dashboard.component.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\components\dashboard\dashboard.component.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.module.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\app.module.js.map
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\main.js
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\app\main.js.map
