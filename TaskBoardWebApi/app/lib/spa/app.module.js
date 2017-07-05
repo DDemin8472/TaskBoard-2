@@ -10,14 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var button_1 = require('@angular2-material/button');
 var app_component_1 = require('./app.component');
+var header_component_1 = require('./components/header/header.component');
+var setting_component_1 = require('./components/setting/setting.component');
+var dashboard_component_1 = require('./components/dashboard/dashboard.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
+            imports: [platform_browser_1.BrowserModule, button_1.MdButtonModule],
+            declarations: [app_component_1.AppComponent, header_component_1.HeaderComponent, setting_component_1.SettingComponent, dashboard_component_1.DashboardComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

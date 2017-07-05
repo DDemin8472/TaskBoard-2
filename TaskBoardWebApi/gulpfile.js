@@ -70,7 +70,7 @@ gulp.task('setup-vendors', function (done) {
     gulp.src('node_modules/' + "angular2-in-memory-web-api/*.js",
         { base: 'node_modules/' })
         .pipe(gulp.dest(lib));
-
+    
     gulp.src('node_modules/' + "core-js/client/shim*.js",
         { base: 'node_modules/' })
         .pipe(gulp.dest(lib));
@@ -88,6 +88,10 @@ gulp.task('setup-vendors', function (done) {
         .pipe(gulp.dest(lib));
 
     gulp.src('node_modules/' + "rxjs/**/*.js",
+        { base: 'node_modules/' })
+        .pipe(gulp.dest(lib));
+
+    gulp.src('node_modules/' + 'hammerjs/*.js',
         { base: 'node_modules/' })
         .pipe(gulp.dest(lib));
 });

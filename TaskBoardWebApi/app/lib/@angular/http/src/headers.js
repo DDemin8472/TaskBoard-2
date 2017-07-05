@@ -1,4 +1,12 @@
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+import { MapWrapper } from '../src/facade/collection';
+/**
  * Polyfill for [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers), as
  * specified in the [Fetch Spec](https://fetch.spec.whatwg.org/#headers-class).
  *
@@ -8,7 +16,7 @@
  * ### Example
  *
  * ```
- * import {Headers} from '\@angular/http';
+ * import {Headers} from '@angular/http';
  *
  * var firstHeaders = new Headers();
  * firstHeaders.append('Content-Type', 'image/jpeg');
@@ -24,12 +32,10 @@
  * console.log(thirdHeaders.get('X-My-Custom-Header')); //'Angular'
  * ```
  *
- * \@experimental
+ * @experimental
  */
 export var Headers = (function () {
-    /**
-     * @param {?=} headers
-     */
+    // TODO(vicb): any -> string|string[]
     function Headers(headers) {
         var _this = this;
         /** @internal header names are lower case */
@@ -40,29 +46,30 @@ export var Headers = (function () {
             return;
         }
         if (headers instanceof Headers) {
-            headers.forEach(function (values, name) {
-                values.forEach(function (value) { return _this.append(name, value); });
+            headers._headers.forEach(function (value, name) {
+                var lcName = name.toLowerCase();
+                _this._headers.set(lcName, value);
+                _this.mayBeSetNormalizedName(name);
             });
             return;
         }
         Object.keys(headers).forEach(function (name) {
-            var values = Array.isArray(headers[name]) ? headers[name] : [headers[name]];
-            _this.delete(name);
-            values.forEach(function (value) { return _this.append(name, value); });
+            var value = headers[name];
+            var lcName = name.toLowerCase();
+            _this._headers.set(lcName, Array.isArray(value) ? value : [value]);
+            _this.mayBeSetNormalizedName(name);
         });
     }
     /**
      * Returns a new Headers instance from the given DOMString of Response Headers
-     * @param {?} headersString
-     * @return {?}
      */
     Headers.fromResponseHeaderString = function (headersString) {
-        var /** @type {?} */ headers = new Headers();
+        var headers = new Headers();
         headersString.split('\n').forEach(function (line) {
-            var /** @type {?} */ index = line.indexOf(':');
+            var index = line.indexOf(':');
             if (index > 0) {
-                var /** @type {?} */ name_1 = line.slice(0, index);
-                var /** @type {?} */ value = line.slice(index + 1).trim();
+                var name_1 = line.slice(0, index);
+                var value = line.slice(index + 1).trim();
                 headers.set(name_1, value);
             }
         });
@@ -70,44 +77,28 @@ export var Headers = (function () {
     };
     /**
      * Appends a header to existing list of header values for a given header name.
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
      */
     Headers.prototype.append = function (name, value) {
-        var /** @type {?} */ values = this.getAll(name);
-        if (values === null) {
-            this.set(name, value);
-        }
-        else {
-            values.push(value);
-        }
+        var values = this.getAll(name);
+        this.set(name, values === null ? [value] : values.concat([value]));
     };
     /**
      * Deletes all header values for the given name.
-     * @param {?} name
-     * @return {?}
      */
     Headers.prototype.delete = function (name) {
-        var /** @type {?} */ lcName = name.toLowerCase();
+        var lcName = name.toLowerCase();
         this._normalizedNames.delete(lcName);
         this._headers.delete(lcName);
     };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
     Headers.prototype.forEach = function (fn) {
         var _this = this;
         this._headers.forEach(function (values, lcName) { return fn(values, _this._normalizedNames.get(lcName), _this._headers); });
     };
     /**
      * Returns first header that matches given name.
-     * @param {?} name
-     * @return {?}
      */
     Headers.prototype.get = function (name) {
-        var /** @type {?} */ values = this.getAll(name);
+        var values = this.getAll(name);
         if (values === null) {
             return null;
         }
@@ -115,45 +106,33 @@ export var Headers = (function () {
     };
     /**
      * Checks for existence of header by given name.
-     * @param {?} name
-     * @return {?}
      */
     Headers.prototype.has = function (name) { return this._headers.has(name.toLowerCase()); };
     /**
      * Returns the names of the headers
-     * @return {?}
      */
-    Headers.prototype.keys = function () { return Array.from(this._normalizedNames.values()); };
+    Headers.prototype.keys = function () { return MapWrapper.values(this._normalizedNames); };
     /**
      * Sets or overrides header value for given name.
-     * @param {?} name
-     * @param {?} value
-     * @return {?}
      */
     Headers.prototype.set = function (name, value) {
-        if (Array.isArray(value)) {
-            if (value.length) {
-                this._headers.set(name.toLowerCase(), [value.join(',')]);
-            }
-        }
-        else {
-            this._headers.set(name.toLowerCase(), [value]);
-        }
+        var strValue = Array.isArray(value) ? value.join(',') : value;
+        this._headers.set(name.toLowerCase(), [strValue]);
         this.mayBeSetNormalizedName(name);
     };
     /**
      * Returns values of all headers.
-     * @return {?}
      */
-    Headers.prototype.values = function () { return Array.from(this._headers.values()); };
+    Headers.prototype.values = function () { return MapWrapper.values(this._headers); };
     /**
-     * @return {?}
+     * Returns string of all headers.
      */
+    // TODO(vicb): returns {[name: string]: string[]}
     Headers.prototype.toJSON = function () {
         var _this = this;
-        var /** @type {?} */ serialized = {};
+        var serialized = {};
         this._headers.forEach(function (values, name) {
-            var /** @type {?} */ split = [];
+            var split = [];
             values.forEach(function (v) { return split.push.apply(split, v.split(',')); });
             serialized[_this._normalizedNames.get(name)] = split;
         });
@@ -161,39 +140,20 @@ export var Headers = (function () {
     };
     /**
      * Returns list of header values for a given name.
-     * @param {?} name
-     * @return {?}
      */
     Headers.prototype.getAll = function (name) {
         return this.has(name) ? this._headers.get(name.toLowerCase()) : null;
     };
     /**
      * This method is not implemented.
-     * @return {?}
      */
     Headers.prototype.entries = function () { throw new Error('"entries" method is not implemented on Headers class'); };
-    /**
-     * @param {?} name
-     * @return {?}
-     */
     Headers.prototype.mayBeSetNormalizedName = function (name) {
-        var /** @type {?} */ lcName = name.toLowerCase();
+        var lcName = name.toLowerCase();
         if (!this._normalizedNames.has(lcName)) {
             this._normalizedNames.set(lcName, name);
         }
     };
     return Headers;
 }());
-function Headers_tsickle_Closure_declarations() {
-    /**
-     * \@internal header names are lower case
-     * @type {?}
-     */
-    Headers.prototype._headers;
-    /**
-     * \@internal map lower case names to actual names
-     * @type {?}
-     */
-    Headers.prototype._normalizedNames;
-}
 //# sourceMappingURL=headers.js.map

@@ -39,3 +39,4 @@ C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\bin\System.Web.Http
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\bin\System.Web.Http.WebHost.xml
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\obj\Debug\TaskBoardWebApi.dll
 C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\obj\Debug\TaskBoardWebApi.pdb
+C:\Users\demindmytry\Desktop\TaskBoardWebApi\TaskBoardWebApi\obj\Debug\TaskBoardWebApi.csprojResolveAssemblyReference.cache
